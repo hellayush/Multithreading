@@ -1,0 +1,103 @@
+Q1 - What do you mean by multithreading ? Why its is important ?
+
+ANS - Multithreading:
+
+Concept: Allows a program to execute multiple threads concurrently. A thread is a lightweight unit of execution within a process.
+Analogy: Imagine a single CPU core as a single chef. Multithreading is like having multiple chefs (threads) working in the same kitchen (process) on different tasks (independent code sections) simultaneously.
+
+* Importance:
+
+Improved Responsiveness: A program with a single thread might become unresponsive if a long-running task is being executed (e.g., downloading a file). With multithreading, the UI can remain responsive while other threads handle background tasks.
+Efficient Use of CPU: While a single thread might be waiting for I/O operations (e.g., disk access), other threads can utilize the CPU for different tasks, improving overall performance.
+Background Tasks: Multithreading allows you to handle long-running tasks (e.g., playing music) in the background without blocking the main thread responsible for the UI. 
+
+Q2 - What are the benefits of multithreading ? 
+
+ANS - * Improved Responsiveness:
+
+A single-threaded program can become unresponsive if it's performing a long-running task (e.g., downloading a large file, performing complex calculations).
+
+      * Efficient CPU Utilization:
+
+A single thread might be waiting for I/O operations (disk access, network requests) to complete before continuing.
+Multithreading allows other threads to utilize the CPU for different tasks while one thread is waiting for I/O. This improves overall program performance by keeping the CPU busy.
+
+      * Background Tasks:
+
+Multithreading enables handling long-running tasks (e.g., playing music, video processing) in the background without blocking the main thread responsible for the UI.
+This ensures a smooth user experience by keeping the UI responsive even during time-consuming operations.
+
+      * Improved Scalability:
+
+Multithreaded applications can potentially scale better on multi-core processors. Different threads can be assigned to different cores, taking advantage of parallel processing capabilities.
+This can lead to significant performance gains for certain workloads that can be effectively divided into independent tasks.
+
+Q3 - What is a thread ?
+
+ANS - In Java, a thread is a lightweight unit of execution within a program. It allows a program to execute multiple tasks concurrently. Here's a short explanation:
+
+Imagine a single CPU core as a single chef.
+A thread is like an assistant chef working in the same kitchen (process) but on a different task (independent code section).
+Multiple threads can share the same memory space of the program but can have separate execution stacks.
+
+Q4 - What are the two ways of implementing thread in java ?
+
+ANS -  There are two primary ways to implement threads in Java:
+
+Extending the Thread class:
+
+You create a subclass of the Thread class and override its run() method.
+The run() method defines the code that the thread will execute concurrently.
+Once you create an object of your subclass, you can call the start() method to initiate thread execution.
+
+ * Implementing the Runnable interface:
+
+You create a class that implements the Runnable interface.
+The Runnable interface has a single abstract method, run(), which defines the code to be executed by the thread.
+You then create an instance of your Runnable class and pass it to the constructor of a Thread object.
+Finally, call the start() method on the Thread object to start the thread's execution.
+
+Q5 - What  is the difference between thread and process ?
+
+ANS - * Process:
+
+An independent unit of execution within an operating system.
+Contains its own memory space, program counter, registers, and system resources (files, I/O).
+Multiple processes can exist on a system, each running independently.
+Creating and destroying processes is resource-intensive.
+
+* Thread:
+
+A lightweight unit of execution within a process.
+Shares the same memory space and resources (files, I/O) as the main process and other threads.
+Multiple threads can exist within a single process, sharing resources and collaborating.
+Creating and destroying threads is less resource-intensive compared to processes. 
+
+Q6 - How can we create Daemon threads ?
+
+ANS - In Java, you can create daemon threads by calling the setDaemon(boolean status) method on a Thread object before you start the thread using the start() method. Here's a breakdown of the steps and key points:
+
+Steps to Create a Daemon Thread:
+
+ * Create a thread: You can either extend the Thread class or implement the Runnable interface, as usual, to define the thread's behavior.
+
+ * Set the daemon flag: Before calling start(), use the setDaemon(true) method on the Thread object. This marks the thread as a daemon thread.
+
+ * Start the thread: Call the start() method on the Thread object to initiate thread execution. 
+
+Q7 - What are the sleep() and wait() methods ?
+
+ANS - * sleep() method:
+
+Class: Belongs to the Thread class.
+Purpose: Temporarily suspends the execution of the current thread for a specified period (in milliseconds).
+Functionality: The thread goes into a non-runnable state and is removed from the CPU scheduling queue. It doesn't release the lock on any object it might be holding.
+Impact on Other Threads: Other threads can continue execution while the current thread is sleeping.
+
+* wait() method:
+
+Class: Defined in the Object class.
+Purpose: Causes the current thread to wait for notification from another thread. The waiting thread releases the lock on the object it's synchronized on, allowing other threads to access and potentially modify the object's state.
+Functionality: The thread enters a waiting state and is removed from the scheduling queue. It relinquishes the lock on the object it was holding.
+Impact on Other Threads: Other threads can acquire the lock on the object and modify its state while the current thread is waiting. The waiting thread will only resume execution after being notified by another thread using notify() or notifyAll().
+
